@@ -1,0 +1,7 @@
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\bin\Debug\Examples.exe.config
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\bin\Debug\Examples.exe
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\bin\Debug\Examples.pdb
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\obj\Debug\Examples.csprojAssemblyReference.cache
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\obj\Debug\Examples.csproj.CoreCompileInputs.cache
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\obj\Debug\Examples.exe
+C:\Users\Тамерлан\Desktop\pp2\Examples\Examples\obj\Debug\Examples.pdb
