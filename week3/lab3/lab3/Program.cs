@@ -16,6 +16,7 @@ namespace lab3
         FileSystemInfo[] FSI = null;
         FileSystemInfo fn = null;
         public int size;
+        public bool a = true;
         
         public Farmanndger()
         {
@@ -107,6 +108,11 @@ namespace lab3
         }
         public void flashback()
         {
+            cursor = 0;
+            path = Dir.Parent.FullName;
+        }
+        public void Rename()
+        {
             Console.Clear();
             string name = Console.ReadLine();
             Console.Clear();
@@ -135,7 +141,8 @@ namespace lab3
         }
         public void Start()
         {
-            while (true)
+            while (a = true )
+            
             {
                 Calc();
                 Show();
@@ -162,6 +169,10 @@ namespace lab3
                 else if (Konsol.Key==ConsoleKey.Escape)
                 {
                     flashback();
+                }
+                else if (Konsol.Key==ConsoleKey.F2)
+                {
+                    Rename();
                 }
 
             }
