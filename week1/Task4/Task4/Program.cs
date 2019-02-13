@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Task_4
+namespace Task4
 {
     class Program
     {
@@ -27,7 +27,7 @@ namespace Task_4
             {
                 for (int j = 0; j <= i; j++)
                 {
-                    Console.Write(arr[i, j]); //!!!!!!!! попробуй это сразу поставить после arr[i, j] = "[*]";
+                    Console.Write(arr[i, j]); // выводим элменеты 
                 }
                 Console.WriteLine();
             }

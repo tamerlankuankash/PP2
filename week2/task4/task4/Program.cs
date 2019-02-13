@@ -10,19 +10,19 @@ namespace task4
     {
         static void createcopydelete()
         {
-            StreamWriter sw = new StreamWriter(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt");
+            StreamWriter sw = new StreamWriter(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt"); // создаем поток, входные данные берутся из файла, указанного в пути 
 
-            sw.WriteLine("SOLUTION projectile motion");
+            sw.WriteLine("SOLUTION projectile motion"); // записываем в поток "SOLUTION projectile motion"
 
-            sw.Close();
+            sw.Close(); // закрываем файл
 
-            File.Copy(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt", @"C: \Users\Тамерлан\Desktop\pp2\week2\examplefortask3\mama\filesfortask4copy.txt");
-            File.Delete(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt");
+            File.Copy(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt", @"C: \Users\Тамерлан\Desktop\pp2\week2\examplefortask3\mama\filesfortask4copy.txt"); // копируем файл из одной папки в другую
+            File.Delete(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt"); //удаляем изначальный файл
 
         }
         static void Main(string[] args)
         {
-            createcopydelete();
+            createcopydelete(); // вызываем функцию createcopydelete
         }
     }
 }
