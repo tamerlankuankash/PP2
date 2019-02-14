@@ -4,70 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Diagnostics;
 
 
 namespace lab3
 {
-    class Farmanndger
+    class Farmanndger 
     {
+      
         public int cursor;
-       public  string path;
+        public string path;
         DirectoryInfo Dir = null;
         FileSystemInfo[] FSI = null;
         FileSystemInfo fn = null;
         public int size;
-        public bool a = true;
-        
+
+
         public Farmanndger()
         {
 
         }
+
         public Farmanndger(string path)
         {
             this.path = path;
             cursor = 0;
         }
-        public void Color(FileSystemInfo f,int index)
+
+        public void Color(FileSystemInfo f, int index)
         {
-            if (cursor == index)
+            if (cursor == index)                               //ввел условия если наш курсор совпадет с номером файла то будет открашивать в выбранный цыет
             {
                 Console.BackgroundColor = ConsoleColor.Cyan;
                 fn = f;
             }
-           else if (f.GetType() == typeof(FileInfo))
+            else if (f.GetType() == typeof(FileInfo)) // если тип файла файл то есть не фолдер, открашиваем его в магнетто цвет
             {
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.Blue;
+                Console.ForegroundColor = ConsoleColor.Magenta;
             }
             else
             {
-                Console.BackgroundColor = ConsoleColor.White;
-                Console.ForegroundColor = ConsoleColor.Black;
+                Console.BackgroundColor = ConsoleColor.Blue; // иначе если не файл а  папка то окрашиваем его в белый
+                Console.ForegroundColor = ConsoleColor.White;
             }
         }
-        public void Show()
+
+        public void Show()// фукция которая будет выводить нам элементы которые содержаться по указанному пути 
         {
-            Console.BackgroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
             Dir = new DirectoryInfo(path);
             FSI = Dir.GetFileSystemInfos();
-            for(int k = 0; k < FSI.Length; k++)
+            for (int k = 0; k < FSI.Length; k++) // условия чтобы системные папки не выводились на экран 
             {
                 if (FSI[k].Name[0] == '.')
                     continue;
-                Color(FSI[k],k);
+                Color(FSI[k], k);
                 Console.WriteLine(FSI[k]);
             }
         }
-        public void Up()
+
+        
+        public void Up()  // если курсор будет проваливаться за пределы нуля то возращаем курсор на последнйи элемент
         {
-            cursor --;
+            cursor--;
             if (cursor < 0)
             {
                 cursor = size - 1;
             }
         }
-        public void Down()
+        public void Down() // если курсор выйдет за пределы файлов которые показаны, курсор окажется на первом элементе 
         {
             cursor++;
             if (cursor == size)
@@ -80,7 +87,7 @@ namespace lab3
             if (fn.GetType() == typeof(DirectoryInfo))
             {
                 cursor = 0;
-                Directory.Delete(fn.FullName);
+                Directory.Delete(fn.FullName,true);//пишем тру чтобы мог удалять папку с содержимым если без логичекого тру то не смогу удалить папку если в нем содержаться файлы
             }
             else
             {
@@ -88,35 +95,37 @@ namespace lab3
                 File.Delete(fn.FullName);
             }
         }
-        public void open()
+
+        public void open() 
         {
             if (fn.GetType() == typeof(DirectoryInfo))
             {
                 cursor = 0;
-                path = fn.FullName;
+                path = fn.FullName;// если открываем папку курсор на начальную позицию и теперь нам нужен другой путь так как мы в другом файле значит присваеваем новый путь
             }
             else
             {
-                StreamReader SR = new StreamReader(fn.FullName);
+                StreamReader SR = new StreamReader(fn.FullName); // если это не папка то это файл и читаем содержимео файла 
 
-                Console.WriteLine(SR.ReadToEnd());
-                SR.Close();
-                Console.ReadKey();
-                Console.Clear();
-
+                 Console.WriteLine(SR.ReadToEnd());
+                 SR.Close();
+                 Console.ReadKey();
+                 Console.Clear();
+                 
+               // Process.Start(fn.FullName);
             }
         }
         public void flashback()
         {
             cursor = 0;
-            path = Dir.Parent.FullName;
+            path = Dir.Parent.FullName; // зашли в папку нужно вернуться, берем предыдущий путь до папки открытья 
         }
         public void Rename()
         {
             Console.Clear();
             string name = Console.ReadLine();
             Console.Clear();
-            string copPath = Path.Combine(Dir.FullName, name);
+            string copPath = Path.Combine(Dir.FullName, name); 
             if (fn.GetType() == typeof(DirectoryInfo))
             {
                 Directory.Move(fn.FullName, copPath);
@@ -127,9 +136,12 @@ namespace lab3
             }
         }
 
-        public void Calc()
+        
+        /* фукнция будет считать нам размер то есть количесво файлов не системных  */
+
+            public void Calcsize()
         {
-            DirectoryInfo D = new DirectoryInfo(path);
+            DirectoryInfo D = new DirectoryInfo(path);         
             FileSystemInfo[] f = D.GetFileSystemInfos();
             size = f.Length;
             for(int k = 0; k < f.Length; k++)
@@ -139,12 +151,18 @@ namespace lab3
                 
             }
         }
+        
+        public void Close()
+        {
+            Environment.Exit(0);
+        }
+
         public void Start()
         {
-            while (a = true )
+            while (true)
             
             {
-                Calc();
+                Calcsize();
                 Show();
                 ConsoleKeyInfo Konsol = Console.ReadKey();
                 if (Konsol.Key == ConsoleKey.UpArrow)
@@ -156,7 +174,7 @@ namespace lab3
                     Down();
                 }
 
-               else if (Konsol.Key == ConsoleKey.Backspace)
+               else if (Konsol.Key == ConsoleKey.Delete)
                 {
                     Delete();
                 }
@@ -174,6 +192,11 @@ namespace lab3
                 {
                     Rename();
                 }
+                else if(Konsol.Key==ConsoleKey.F4)
+                {
+                    Close();
+                }
+                
 
             }
         }
