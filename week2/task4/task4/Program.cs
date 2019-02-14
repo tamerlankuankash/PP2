@@ -10,7 +10,7 @@ namespace task4
     {
         static void createcopydelete()
         {
-            StreamWriter sw = new StreamWriter(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt"); // создаем поток, входные данные берутся из файла, указанного в пути 
+            StreamWriter sw = new StreamWriter(@"C:\Users\Тамерлан\Desktop\pp2\week2\examplefortask3\Tamerlan\filesfortask4.txt"); // создаем поток
 
             sw.WriteLine("SOLUTION projectile motion"); // записываем в поток "SOLUTION projectile motion"
 
