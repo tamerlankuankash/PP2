@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Diagnostics;
+using System.CodeDom;
+
 
 
 namespace lab3
 {
-    class Farmanndger 
+    class Farmanndger
     {
-      
+
         public int cursor;
         public string path;
         DirectoryInfo Dir = null;
@@ -65,7 +67,7 @@ namespace lab3
             }
         }
 
-        
+
         public void Up()  // если курсор будет проваливаться за пределы нуля то возращаем курсор на последнйи элемент
         {
             cursor--;
@@ -87,7 +89,7 @@ namespace lab3
             if (fn.GetType() == typeof(DirectoryInfo))
             {
                 cursor = 0;
-                Directory.Delete(fn.FullName,true);//пишем тру чтобы мог удалять папку с содержимым если без логичекого тру то не смогу удалить папку если в нем содержаться файлы
+                Directory.Delete(fn.FullName, true);//пишем тру чтобы мог удалять папку с содержимым если без логичекого тру то не смогу удалить папку если в нем содержаться файлы
             }
             else
             {
@@ -96,23 +98,23 @@ namespace lab3
             }
         }
 
-        public void open() 
+        public void open()
         {
             if (fn.GetType() == typeof(DirectoryInfo))
             {
-                cursor = 0;
+                 cursor = 0;
                 path = fn.FullName;// если открываем папку курсор на начальную позицию и теперь нам нужен другой путь так как мы в другом файле значит присваеваем новый путь
             }
             else
             {
-                StreamReader SR = new StreamReader(fn.FullName); // если это не папка то это файл и читаем содержимео файла 
+               /* StreamReader SR = new StreamReader(fn.FullName); // если это не папка то это файл и читаем содержимео файла 
 
-                 Console.WriteLine(SR.ReadToEnd());
-                 SR.Close();
-                 Console.ReadKey();
-                 Console.Clear();
-                 
-               // Process.Start(fn.FullName);
+                Console.WriteLine(SR.ReadToEnd());
+                SR.Close();
+                Console.ReadKey();
+                Console.Clear();*/
+
+                 Process.Start(fn.FullName);
             }
         }
         public void flashback()
@@ -125,7 +127,7 @@ namespace lab3
             Console.Clear();
             string name = Console.ReadLine();
             Console.Clear();
-            string copPath = Path.Combine(Dir.FullName, name); 
+            string copPath = Path.Combine(Dir.FullName, name);
             if (fn.GetType() == typeof(DirectoryInfo))
             {
                 Directory.Move(fn.FullName, copPath);
@@ -136,22 +138,22 @@ namespace lab3
             }
         }
 
-        
+
         /* фукнция будет считать нам размер то есть количесво файлов не системных  */
 
-            public void Calcsize()
+        public void Calcsize()
         {
-            DirectoryInfo D = new DirectoryInfo(path);         
+            DirectoryInfo D = new DirectoryInfo(path);
             FileSystemInfo[] f = D.GetFileSystemInfos();
             size = f.Length;
-            for(int k = 0; k < f.Length; k++)
+            for (int k = 0; k < f.Length; k++)
             {
-                if (f[k].Name[0]=='.')
-                   size--;
-                
+                if (f[k].Name[0] == '.')
+                    size--;
+
             }
         }
-        
+
         public void Close()
         {
             Environment.Exit(0);
@@ -160,7 +162,7 @@ namespace lab3
         public void Start()
         {
             while (true)
-            
+
             {
                 Calcsize();
                 Show();
@@ -174,34 +176,34 @@ namespace lab3
                     Down();
                 }
 
-               else if (Konsol.Key == ConsoleKey.Delete)
+                else if (Konsol.Key == ConsoleKey.Delete)
                 {
                     Delete();
                 }
 
-                else if (Konsol.Key==ConsoleKey.Enter)
+                else if (Konsol.Key == ConsoleKey.Enter)
                 {
                     open();
 
                 }
-                else if (Konsol.Key==ConsoleKey.Escape)
+                else if (Konsol.Key == ConsoleKey.Escape)
                 {
                     flashback();
                 }
-                else if (Konsol.Key==ConsoleKey.F2)
+                else if (Konsol.Key == ConsoleKey.F2)
                 {
                     Rename();
                 }
-                else if(Konsol.Key==ConsoleKey.F4)
+                else if (Konsol.Key == ConsoleKey.F4)
                 {
                     Close();
                 }
-                
+
 
             }
         }
-       
-         
+
+
     }
 
     class Program
